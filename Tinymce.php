@@ -33,7 +33,7 @@ class Tinymce extends InputWidget
 
     public function run()
     {
-
+        Html::addCssStyle($this->options, ['opacity' => 0]);
         if ($this->hasModel()) {
 
             if (!ArrayHelper::getValue($this->options, 'id')) {
