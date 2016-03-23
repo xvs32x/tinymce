@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Фейковый бандл для подгрузки бутстрап стилей в TinyMCE
+ * Fake Bundle for bootstrap styles
  * */
 namespace xvs32x\tinymce;
 

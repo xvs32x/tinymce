@@ -6,6 +6,7 @@ use Yii;
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 class Tinymce extends InputWidget
@@ -19,13 +20,18 @@ class Tinymce extends InputWidget
         parent::init();
         if (!$this->pluginOptions) {
             $this->pluginOptions = [
+                'setup' => new JsExpression("
+                    function(editor){
+                        editor.on('change', function () {
+                        editor.save();
+                    });
+                 }"),
                 'plugins' => [
                     "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
                     "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
                 ],
                 'toolbar1' => "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | link unlink anchor | image media | forecolor backcolor",
-                'toolbar2' => "",
                 'language' => ArrayHelper::getValue(explode('-', Yii::$app->language), '0', Yii::$app->language),
             ];
         }
